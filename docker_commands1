@@ -1,0 +1,53 @@
+1. docker search
+
+   It searches the images on docker hub
+   
+   docker search ubuntu
+   docker search --filter "is-official=true" --filter "stars=3" ubuntu
+   
+2. docker run
+   
+   It checks existence of local image else pulls it from remote registry
+   creates a new container
+   creates a new top R/W layer for modifications
+   creates a N/W interface to connect to N/W(to default if no --net options)
+   starts container   
+   
+   docker run -it ubuntu /bin/bash
+   docker run -d ubuntu
+   docker run -it --name myubuntu ubuntu
+   
+3. docker image
+   
+   This command works on image
+   
+   docker image ls
+   docker image pull
+   docker image push
+   docker image tag
+   docker image history
+   docker image load
+   docker image save
+   docker image tag
+   
+4. docker ps
+    
+    Checking the container processes
+    
+    docker ps
+    docker ps -a
+    
+    
+5. docker exec
+   
+   to go inside container and perfomr checks etc.
+   docker exec -it myubun bash
+   
+   
+                
+                
+
+   
+   
+   
+   
