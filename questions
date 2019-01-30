@@ -1,0 +1,6 @@
+1. Can we have add/update control groups dynamically.
+yes..throug docker update command
+
+2. Can we have docker server in windows and clinets in other machines
+
+3. Can we allow connections from a particular subnet to docker
