@@ -1,0 +1,65 @@
+COW(Copy on Write File system)
+---------------------------------
+docker run -d --name cow1 tomcat
+docker run -d --name cow2 maven
+
+check the common layers...
+
+cd /var/lib/docker/
+cd /var/lib/docker/image/overlay2
+cd /var/lib/docker/image/overlay2/imagedb/content/sha256
+cd /var/lib/docker/image/overlay2/layerdb/sha256
+cd /var/lib/docker/containers
+
+When we create containers…we will create another directory in this directory…as a R/W layer of COW.
+
+docker history
+docker inspect <imageid>
+
+CGroups
+---------------------------------
+docker run -d --name cgroupsm1 --memory 200m tomcat
+docker ps
+docker stats --no-stream cgroupsm1
+
+lscpu
+docker run -d --name cgroupsc1 --cpus 0.1 tomcat
+docker run -d --name cgroupsc2 --cpus 0.3 tomcat
+
+docker stats --no-stream
+
+docker update cgroupsc1 --cpus 0.2
+docker stats --no-stream
+
+Namespaces
+------------------------------------
+ip addr show
+docker exec -it cgroupsc1 bash
+ip addr show
+docker exec -it cgroupsc2 bash
+ip addr show
+
+
+docker run -it --net=host alpine 
+ip addr show
+
+docker run -it alpine
+ps aux
+
+docker run -it --pid=host alpine
+ps aux
+
+Sharing namespaces among containers
+docker run -d --name cont1 alpine
+docker run –name=cont2 --net=container:cont1 alpine
+docker run –name=cont3 --pid=container:cont2 alpine 
+
+
+
+
+
+
+
+
+
+
