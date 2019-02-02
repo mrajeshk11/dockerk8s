@@ -1,0 +1,76 @@
+docker network ls
+
+default bridge network
+----------------------
+docker run -d -it --name con1 alpine
+docker run -d -it --name con2 alpine
+
+docker ps
+docker inspect network bridge
+
+identify the containers con1 and con2
+
+docker exec -it con1 sh
+ip addr show
+ping -c 4 google.com
+ping -c 4 <ipaddr-con2>
+ping -c 4 con2        --- should not work means dns will not work for default bridges
+
+docker rm -v -f con1 con2
+
+User defined bridge
+----------------------
+docker network create --driver bridge mynetwork
+docker network ls
+docker inspect network mynetwork
+
+docker run -d -it --name con1 --network mynetwork alpine
+docker run -d -it --name con2 --network mynetwork alpine
+
+docker ps
+docker inspect mynetwork
+
+docker exec -it con1 sh
+ip addr show
+ping -c 4 google.com
+ping -c 4 <ipaddr-con2>
+ping -c 4 con2        --- should work means dns is avaialable in mynetwork
+
+docker rm -v -f con1 con2
+
+Check the connection betweek two networks
+----------------------------------
+docker network create --driver bridge mynetwork1
+docker network create --driver bridge mynetwork2
+
+docker run -d -it --name con1 --network mynetwork1 alpine
+docker run -d -it --name con2 --network mynetwork1 alpine
+
+docker run -d -it --name con3 --network mynetwork2 alpine
+docker run -d -it --name con4 --network mynetwork2 alpine
+
+docker inspect mynetwork1
+docker inspect mynetwork2
+
+get the ips of containers of both the networks
+
+docker exec -it con1 sh
+ping -c 4 <ipaddr-con3>
+ping -c 4 con3
+
+Host Network
+----------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
