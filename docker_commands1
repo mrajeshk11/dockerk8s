@@ -43,6 +43,12 @@
    to go inside container and perfomr checks etc.
    docker exec -it myubun bash
    
+6. docker commit
+   to create an image from a container
+   
+7. docker update
+   to update the config parameters of a container like cgroups etc.
+   
    
                 
                 
