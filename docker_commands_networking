@@ -58,8 +58,18 @@ docker exec -it con1 sh
 ping -c 4 <ipaddr-con3>
 ping -c 4 con3
 
+
+
 Host Network
 ----------------
+ docker run --rm -d --network host --name my_nginx nginx
+ curl localhost
+ 
+ Attach to existing network
+ ------------------
+ docker network connect [OPTIONS] NETWORK CONTAINER
+
+
 
 
 
